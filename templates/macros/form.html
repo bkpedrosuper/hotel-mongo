@@ -1,0 +1,30 @@
+{% macro form_macro(form) %}
+    <form method="post">
+
+        {% for field, errors in form.errors.items() %}
+            <div class="text-danger">
+                <div class="mb-1">
+                    <br>{{ form[field].label }}: {{ ', '.join(errors) }}
+                </div>
+            </div>
+        {% endfor %}
+
+        {{ form.csrf_token }}
+
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            <div class="mb-3">
+                {{ field.label(class_="form-label") }}
+                {% if field.type == 'SelectField' or field.type == 'SelectMultipleField' %}
+                    {{ field(class_="form-select") }}
+                {% else %}
+                    {{ field(class_="form-control") }}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Criar</button>
+        </div>
+
+    </form>
+{% endmacro %}

@@ -1,0 +1,21 @@
+{% macro table_macro(table) %}
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            {% if table|length > 0 %}
+                {% for col in table[0].keys() %}
+                    <th scope="col"> {{ col }} </th>
+                {% endfor %}
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in table %}
+            <tr>
+                {% for key, value in row.items() %}
+                    <td> {{ value }} </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endmacro %}

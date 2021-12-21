@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "macros/form.html" import form_macro %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+    <div class="container min-vh-100">
+        <div class="card p-5 mt-5 m-5">
+            {% if erro %}
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    {{ erro }}
+                </div>
+            {% endif %}
+            <p class="text-mandatory">
+                Campo obrigatório *
+            </p>
+            {{ form_macro(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}{% endblock %}

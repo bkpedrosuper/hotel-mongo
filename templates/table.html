@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "macros/table.html" import table_macro %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+    <div class="container min-vh-100">
+        <div class="mt-5 text-end">
+            <form action="/{{ title.lower() }}_form">
+                <button type="submit" class="btn btn-success">Criar</button>
+            </form>
+        </div>
+
+        <div class="card mb-3 mt-3">
+            <div class="card-header">{{ title }}</div>
+            <div class="card-body">
+                {{ table_macro(table) }}
+            </div>
+            <!-- <div class="card-footer text-end">
+                <button type="button" class="btn btn-danger">Deletar</button>
+                <button type="button" class="btn btn-info">Editar</button>
+            </div> -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}{% endblock %}
