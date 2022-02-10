@@ -16,7 +16,7 @@ def select_next_id() -> int:
     return db.session.query(f).first()[0]
 
 def select_all():
-    return db.session.query(Quarto.codq, Quarto.numero, Quarto.andar, Quarto.preco_dia.label(f'Preço do Quarto em R$')).all()
+    return db.session.query(Quarto.codq, Quarto.numero, Quarto.andar, Quarto.preco_dia.label(f'Preço do Quarto em R$'), Quarto.ramal).all()
 
 def insert_from_dict(data: dict):
     hospede = from_dict(data)
