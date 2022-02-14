@@ -1,6 +1,4 @@
-
-from app import db
-
+from app import db, mongo
 
 class Quarto(db.Model):
     __tablename__ = 'quarto'
@@ -21,6 +19,9 @@ def select_all():
 def insert_from_dict(data: dict):
     hospede = from_dict(data)
     insert(hospede)
+
+def insert_in_mongo(data: dict):
+    mongo.db["quarto"].insert_one(data)
 
 def insert(hospede: Quarto):
     db.session.add(hospede)
