@@ -21,7 +21,7 @@ def hospede_form():
     erro = None
     if form.validate_on_submit():
         try:
-            dao.insert_from_dict(form.data)
+            dao.insert_in_mongo(form.data)
         except SQLAlchemyError as e:
             erro = e
             return render_template('form.html', title='Hospede', form=form, erro=erro)

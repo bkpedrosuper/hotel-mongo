@@ -21,7 +21,7 @@ def empregado_form():
     erro = None
     if form.validate_on_submit():
         try:
-            dao.insert_from_dict(form.data)
+            dao.insert(form.data)
         except SQLAlchemyError as e:
             erro = e
             return render_template('form.html', title='Empregado', form=form, erro=erro)

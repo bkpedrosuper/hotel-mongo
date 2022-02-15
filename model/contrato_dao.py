@@ -1,22 +1,18 @@
 
-from app import db
-from model import Hospede
+from app import db, mongo
+from model.reserva_dao import increase_occupants_of_reservation
 
-class Contrato(db.Model):
-    __tablename__ = 'contrato'
-    codr = db.Column(db.Integer, db.ForeignKey('reserva.codr'), primary_key=True)
-    codh = db.Column(db.Integer, db.ForeignKey('hospede.codh'))
+class Contrato():
+    tablename = 'contrato'
+    def __init__(self):
+        self.db = mongo.db
+        self.collection = mongo.db["contrato"]
 
-def insert_from_dict(data: dict):
-    contrato = from_dict(data)
-    insert(contrato)
-
-def insert(contrato: Contrato):
-    db.session.add(contrato)
-    db.session.commit()
-
-def from_dict(_dict: dict) -> Contrato:
-    return  Contrato (
-        codr = _dict['reserva'],
-        codh = _dict['hospede'],
-    )
+def insert(data: dict):
+    contrato = Contrato()
+    try:
+        increase_occupants_of_reservation(data['reserva'])
+        return contrato.collection.insert_one(data)
+    except:
+        return
+    
